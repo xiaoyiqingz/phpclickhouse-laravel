@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PhpClickHouseLaravel;
-
 
 use Illuminate\Support\ServiceProvider;
 

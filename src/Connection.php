@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PhpClickHouseLaravel;
-
 
 use ClickHouseDB\Client;
 
@@ -32,5 +30,4 @@ class Connection extends \Illuminate\Database\Connection
         }
         return $conn;
     }
-
 }

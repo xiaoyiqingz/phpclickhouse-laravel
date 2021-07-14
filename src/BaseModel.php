@@ -1,8 +1,6 @@
 <?php
 
-
 namespace PhpClickHouseLaravel;
-
 
 use ClickHouseDB\Client;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
@@ -11,7 +9,6 @@ use Illuminate\Support\Str;
 
 class BaseModel
 {
-
     use HasAttributes;
 
     /**
@@ -278,5 +275,4 @@ class BaseModel
         }
         return static::getClient()->write($sql);
     }
-
 }
