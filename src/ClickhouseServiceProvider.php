@@ -4,6 +4,8 @@ namespace PhpClickHouseLaravel;
 
 use Illuminate\Support\ServiceProvider;
 
+//use Tinderbox\ClickhouseBuilder\Integrations\Laravel\Connection;
+
 /**
  * Service provider to connect Clickhouse driver in Laravel.
  */
@@ -15,8 +17,14 @@ class ClickhouseServiceProvider extends ServiceProvider
 
         $db->extend('clickhouse', function ($config, $name) {
             $config['name'] = $name;
-            $conn = Connection::createWithClient($config);
-            return $conn;
+
+            $connection = new Connection($config);
+
+            if ($this->app->bound('events')) {
+                $connection->setEventDispatcher($this->app['events']);
+            }
+
+            return $connection;
         });
     }
 }

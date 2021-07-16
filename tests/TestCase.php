@@ -22,11 +22,15 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 "database" => "trade",
                 "username" => "default",
                 "password" => "test",
-                "timeout_connect" => "2",
-                "timeout_query" => "2",
-                "https" => false,
-                "retries" => 0,
-                "name" => "clickhouse",
+                'options' => [
+                    'timeout' => 10,
+                    'protocol' => 'http'
+                ],
+                //"timeout_connect" => "2",
+                //"timeout_query" => "2",
+                //"https" => false,
+                //"retries" => 0,
+                //"name" => "clickhouse",
             ]
         );
     }

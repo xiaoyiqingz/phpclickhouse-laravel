@@ -2,32 +2,33 @@
 
 namespace PhpClickHouseLaravel;
 
-use ClickHouseDB\Client;
+use Tinderbox\ClickhouseBuilder\Integrations\Laravel\Connection as BaseConnection;
+use PhpClickHouseLaravel\Query\Builder as QueryBuilder;
 
-class Connection extends \Illuminate\Database\Connection
+class Connection extends BaseConnection
 {
-    protected $client;
-
     /**
-     * @return Client
+     * undocumented function
+     *
+     * @return void
      */
-    public function getClient()
+    public function __construct(array $config)
     {
-        return $this->client;
+        parent::__construct($config);
     }
 
-    public static function createWithClient($config)
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function update($query, $bindings = [])
     {
-        $conn = new static(null, '', '', $config);
-        $conn->client = new Client($config);
-        $conn->client->database($config['database']);
-        $conn->client->setTimeout($config['timeout_query']);
-        $conn->client->setConnectTimeOut($config['timeout_connect']);
-        if ($retries = (int)($config['retries'] ?? null)) {
-            $curler = new CurlerRollingWithRetries();
-            $curler->setRetries($retries);
-            $conn->client->transport()->setDirtyCurler($curler);
-        }
-        return $conn;
+        return $this->statement($query);
+    }
+
+    public function query()
+    {
+        return new QueryBuilder($this);
     }
 }
