@@ -231,3 +231,8 @@ class MyTable extends BaseModel
     protected $table = 'my_table_buffer';
 }
 ```
+
+### need implement
+1. DB find()
+2. DB chunk()
+3. DB lazy()

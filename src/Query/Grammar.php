@@ -56,4 +56,14 @@ class Grammar extends BaseGrammar
         $sql = ' UPDATE ' . $arrToStr;
         return $sql;
     }
+
+    /**
+     *  Get the format for database stored dates.
+     *
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 }

@@ -8,11 +8,13 @@ use Illuminate\Support\Arr;
 
 class Builder extends BaseBuilder
 {
-    public function __construct(Connection $connection)
-    {
+    public function __construct(
+        Connection $connection,
+        Grammar $grammer = null
+    ) {
         $this->connection = $connection;
 
-        $this->grammar = new Grammar();
+        $this->grammar = $grammer ?: $connection->getQueryGrammar();
     }
 
     /**
@@ -66,21 +68,6 @@ class Builder extends BaseBuilder
         $result = $this->get(is_null($key) ? [$column] : [$column, $key]);
 
         return $result->pluck($column, $key);
-
-        //$result = $this->onceWithColumns(
-        //    is_null($key) ? [$column] : [$column, $key],
-        //    function () {
-        //        if (!empty($this->async)) {
-        //            return $this->connection->selectAsync($this->toAsyncQueries());
-        //        } else {
-        //            return $this->connection->select($this->toSql(), [], $this->getFiles());
-        //        }
-        //    }
-        //);
-
-        //if (empty($result)) {
-        //    return collect();
-        //}
     }
 
     protected function onceWithColumns($columns, $callback)
