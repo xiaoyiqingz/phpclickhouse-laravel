@@ -4,12 +4,14 @@ namespace PhpClickHouseLaravel;
 
 use ClickHouseDB\Client;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class BaseModel
 {
     use HasAttributes;
+    use HasTimestamps;
 
     /**
      * The table associated with the model.
@@ -32,6 +34,15 @@ class BaseModel
      * @var bool
      */
     public $exists = false;
+
+    const CREATED_AT = 'created_at';
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = 'updated_at';
 
     /**
      * Get the table associated with the model.
@@ -58,7 +69,8 @@ class BaseModel
      */
     public static function getClient()
     {
-        return DB::connection('clickhouse')->getClient();
+        $instance = new static();
+        return DB::connection($instance->connection)->getClient();
     }
 
     /**
