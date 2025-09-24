@@ -10,11 +10,9 @@ class Builder extends BaseBuilder
 {
     public function __construct(
         Connection $connection,
-        Grammar $grammer = null
     ) {
         $this->connection = $connection;
-
-        $this->grammar = $grammer ?: $connection->getQueryGrammar();
+        $this->grammar = $connection->getQueryGrammar();
     }
 
     /**
@@ -63,7 +61,7 @@ class Builder extends BaseBuilder
         return count($result) > 0 ? reset($result) : null;
     }
 
-    public function pluck(string $column, string $key = null)
+    public function pluck(string $column, ?string $key = null)
     {
         $result = $this->get(is_null($key) ? [$column] : [$column, $key]);
 

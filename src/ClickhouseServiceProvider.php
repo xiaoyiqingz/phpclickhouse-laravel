@@ -4,8 +4,6 @@ namespace PhpClickHouseLaravel;
 
 use Illuminate\Support\ServiceProvider;
 
-//use Tinderbox\ClickhouseBuilder\Integrations\Laravel\Connection;
-
 /**
  * Service provider to connect Clickhouse driver in Laravel.
  */

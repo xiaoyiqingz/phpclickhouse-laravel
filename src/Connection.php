@@ -10,8 +10,6 @@ class Connection extends BaseConnection
 {
     /**
      * undocumented function
-     *
-     * @return void
      */
     public function __construct(array $config)
     {
@@ -21,9 +19,7 @@ class Connection extends BaseConnection
     }
 
     /**
-     * undocumented function
-     *
-     * @return void
+     * @return bool
      */
     public function update($query, $bindings = [])
     {
@@ -32,7 +28,7 @@ class Connection extends BaseConnection
 
     public function query()
     {
-        return new QueryBuilder($this, $this->getQueryGrammar());
+        return new QueryBuilder($this);
     }
 
     /**
@@ -40,6 +36,6 @@ class Connection extends BaseConnection
      */
     protected function getDefaultQueryGrammar()
     {
-        return new QueryGrammar;
+        return new QueryGrammar();
     }
 }

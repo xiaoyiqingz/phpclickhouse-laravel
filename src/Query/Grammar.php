@@ -23,7 +23,7 @@ class Grammar extends BaseGrammar
         $sql .= $this->compileUpdateValues($values);
 
         if (!is_null($query->getWheres()) && !empty($query->getWheres())) {
-            $sql .= " {$this->compileWheresComponent($query, $query->getWheres())}";
+            $sql .= " {$this->compileWheresComponent($query,$query->getWheres())}";
         } else {
             throw GrammarException::missedWhereForUpdate();
         }
@@ -39,7 +39,7 @@ class Grammar extends BaseGrammar
     public function compileUpdateValues(array $values)
     {
         if (empty($values)) {
-            throw GrammarExcpetion::missedUpdateValues();
+            throw GrammarException::missedUpdateValues();
         }
 
         $arrToStr = implode(
